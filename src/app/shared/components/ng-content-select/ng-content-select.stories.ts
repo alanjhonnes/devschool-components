@@ -19,7 +19,7 @@ const Template: Story<NgContentSelectComponent> = (
   <div top-left>TOP LEFT</div>
   <div top-right>TOP RIGHT</div>
   <div bottom-left>BOTTOM LEFT</div>
-  <app-pure-component bottom-right></app-pure-component>
+  <h1>Teste </h1>
 </app-ng-content-select>
 `,
 });

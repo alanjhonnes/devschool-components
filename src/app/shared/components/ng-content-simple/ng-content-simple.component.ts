@@ -2,7 +2,12 @@ import {
   Component,
   ViewEncapsulation,
   ChangeDetectionStrategy,
+  ContentChild,
+  AfterContentInit,
+  ContentChildren,
+  QueryList,
 } from '@angular/core';
+import { PureComponentComponent } from '../pure-component/pure-component.component';
 
 @Component({
   selector: 'app-ng-content-simple',
@@ -14,4 +19,11 @@ import {
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NgContentSimpleComponent {}
+export class NgContentSimpleComponent implements AfterContentInit {
+  @ContentChildren(PureComponentComponent)
+  pureComponent: QueryList<PureComponentComponent> | undefined;
+
+  ngAfterContentInit(): void {
+    console.log(this.pureComponent);
+  }
+}

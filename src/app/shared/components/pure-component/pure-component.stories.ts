@@ -23,3 +23,8 @@ export const Basic = Template.bind({});
 Basic.args = {
   open: true,
 };
+
+export const Fechado = Template.bind({});
+Basic.args = {
+  open: false,
+};

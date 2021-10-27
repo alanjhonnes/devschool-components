@@ -5,4 +5,8 @@ import { Component } from '@angular/core';
   templateUrl: './child.component.html',
   styleUrls: ['./child.component.scss'],
 })
-export class ChildComponent {}
+export class ChildComponent {
+  incrementar() {
+    console.log('incrementar');
+  }
+}

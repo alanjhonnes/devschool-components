@@ -19,8 +19,8 @@ const Template: Story<NgContentSimpleComponent> = (
   },
   template: `
 <app-ng-content-simple>
-  <h1>My content</h1>
-  <app-pure-component></app-pure-component>
+    <h1>My content</h1>
+    <app-pure-component></app-pure-component>
 </app-ng-content-simple>
 `,
 });

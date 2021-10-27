@@ -19,7 +19,7 @@ import { PureComponentComponent } from '../pure-component/pure-component.compone
       <ng-content select="[bottom-left]"></ng-content>
     </div>
     <div class="bottom-right">
-      <ng-content select="[bottom-right]"></ng-content>
+      <ng-content select="h1"></ng-content>
     </div>
   `,
   styleUrls: ['./ng-content-select.component.scss'],

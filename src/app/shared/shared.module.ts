@@ -59,6 +59,7 @@ export const sharedComponents = [
   ContentTriggerComponent,
   ContentTriggerDirective,
   CounterComponent,
+  ParentComponent,
 ];
 
 @NgModule({

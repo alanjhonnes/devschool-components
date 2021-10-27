@@ -5,6 +5,7 @@ import { ParentComponent } from './parent.component';
 export default {
   title: 'ParentComponent',
   component: ParentComponent,
+  template: `<app-parent></app-parent>`,
 } as Meta<ParentComponent>;
 
 const Template: Story<ParentComponent> = (args: ParentComponent) => ({

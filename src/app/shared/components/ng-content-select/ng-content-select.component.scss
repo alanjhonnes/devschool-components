@@ -18,6 +18,13 @@
   margin-right: -100%;
 }
 
+::ng-deep {
+  [top-left] {
+    background-color: red;
+  }
+}
+
+
 .bottom-left {
   position: absolute;
   bottom: 0;
