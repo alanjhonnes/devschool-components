@@ -14,7 +14,11 @@ const Template: Story<ConfigurableComponent> = (
 ) => ({
   props: args,
   moduleMetadata: {
-    imports: [ConfigurableModule],
+    imports: [
+      ConfigurableModule.forRoot({
+        color: 'green',
+      }),
+    ],
     // providers: [
     //   {
     //     provide: CONFIG_TOKEN,

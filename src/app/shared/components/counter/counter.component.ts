@@ -20,12 +20,14 @@ export class CounterComponent implements ControlValueAccessor {
   onTouched: null | (() => void) = null;
 
   writeValue(value: number): void {
+    console.log('writeValue', value);
     this.value = value;
   }
 
   plus(): void {
     this.value++;
     if (this.onChange) {
+      console.log('onChange plus', this.value);
       this.onChange(this.value);
     }
     if (this.onTouched) {
@@ -36,6 +38,7 @@ export class CounterComponent implements ControlValueAccessor {
   minus(): void {
     this.value--;
     if (this.onChange) {
+      console.log('onChange minus', this.value);
       this.onChange(this.value);
     }
     if (this.onTouched) {

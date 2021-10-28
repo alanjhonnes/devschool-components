@@ -44,11 +44,13 @@ export function mixinLikeable<T extends Constructor<HasEntityId>>(
     }
 
     toggleLike(): void {
+      console.log('toggle');
       if (this.isLiked) {
         this.unlike.emit(this.entityId);
       } else {
         this.like.emit(this.entityId);
       }
+      this.isLiked = !this.isLiked;
     }
   }
 

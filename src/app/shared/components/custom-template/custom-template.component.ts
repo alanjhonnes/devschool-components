@@ -28,4 +28,10 @@ export class CustomTemplateComponent {
 
   @Input()
   template: TemplateRef<TemplateContext> | null = null;
+
+  @Input()
+  templateConteudo!: TemplateRef<TemplateContext>;
+
+  @Input()
+  textos!: string[];
 }

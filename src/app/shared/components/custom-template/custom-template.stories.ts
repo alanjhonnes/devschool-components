@@ -19,7 +19,9 @@ const Template: Story<CustomTemplateComponent> = (
   <app-custom-template
   [title]="title"
   [subtitle]="subtitle"
+  [template]="customTemplate"
 
+  [textos]="['a', 'b', 'c']"
 >
 </app-custom-template>
 
@@ -32,6 +34,10 @@ const Template: Story<CustomTemplateComponent> = (
   <p style="color: blue">{{title}}</p>
   <p style="color: red">{{subtitle}}</p>
   <p style="color: green">{{default}}</p>
+</ng-template>
+
+<ng-template #templateConteudo let-texto>
+  <div style="background-color: grey">{{texto}}</div>
 </ng-template>
 `,
 });

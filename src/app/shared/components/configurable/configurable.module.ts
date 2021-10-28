@@ -20,14 +20,19 @@ import {
 })
 export class ConfigurableModule {
   public static forRoot(
-    config: ComponentConfig
+    config: Partial<ComponentConfig>
   ): ModuleWithProviders<ConfigurableModule> {
     return {
       ngModule: ConfigurableModule,
       providers: [
         {
           provide: CONFIG_TOKEN,
-          useValue: config,
+          useFactory: () => {
+            return {
+              ...DEFAULT_CONFIG,
+              ...config,
+            };
+          },
         },
       ],
     };

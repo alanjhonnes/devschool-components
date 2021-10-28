@@ -108,12 +108,12 @@
         },
         {
             "name": "Likeable",
-            "id": "interface-Likeable-6f480942a75b7cfcf947f26703cfd5d5",
+            "id": "interface-Likeable-871eae4d7e5b1c5f0f08807c47ce4cb9",
             "file": "src/app/shared/mixins/likeable.mixin.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { Constructor } from './constructor.type';\nimport {\n  EventEmitter,\n  Output,\n  Input,\n  Injectable,\n  Directive,\n} from '@angular/core';\nimport { HasEntityId } from './has-entity-id.type';\n\nexport interface Likeable {\n  isLiked: boolean;\n\n  likes: number;\n\n  like: EventEmitter<string>;\n\n  unlike: EventEmitter<string>;\n\n  toggleLike(): void;\n}\n\nexport type LikeableConstructor = Constructor<Likeable>;\n\nexport function mixinLikeable<T extends Constructor<HasEntityId>>(\n  base: T\n): LikeableConstructor & T {\n  @Directive()\n  class BaseLikeableClass extends base implements Likeable {\n    @Input()\n    isLiked!: boolean;\n\n    @Input()\n    likes!: number;\n\n    @Output()\n    like = new EventEmitter<string>();\n\n    @Output()\n    unlike = new EventEmitter<string>();\n\n    constructor(...args: any[]) {\n      super(...args);\n    }\n\n    toggleLike(): void {\n      if (this.isLiked) {\n        this.unlike.emit(this.entityId);\n      } else {\n        this.like.emit(this.entityId);\n      }\n    }\n  }\n\n  return BaseLikeableClass;\n}\n",
+            "sourceCode": "import { Constructor } from './constructor.type';\nimport {\n  EventEmitter,\n  Output,\n  Input,\n  Injectable,\n  Directive,\n} from '@angular/core';\nimport { HasEntityId } from './has-entity-id.type';\n\nexport interface Likeable {\n  isLiked: boolean;\n\n  likes: number;\n\n  like: EventEmitter<string>;\n\n  unlike: EventEmitter<string>;\n\n  toggleLike(): void;\n}\n\nexport type LikeableConstructor = Constructor<Likeable>;\n\nexport function mixinLikeable<T extends Constructor<HasEntityId>>(\n  base: T\n): LikeableConstructor & T {\n  @Directive()\n  class BaseLikeableClass extends base implements Likeable {\n    @Input()\n    isLiked!: boolean;\n\n    @Input()\n    likes!: number;\n\n    @Output()\n    like = new EventEmitter<string>();\n\n    @Output()\n    unlike = new EventEmitter<string>();\n\n    constructor(...args: any[]) {\n      super(...args);\n    }\n\n    toggleLike(): void {\n      console.log('toggle');\n      if (this.isLiked) {\n        this.unlike.emit(this.entityId);\n      } else {\n        this.like.emit(this.entityId);\n      }\n      this.isLiked = !this.isLiked;\n    }\n  }\n\n  return BaseLikeableClass;\n}\n",
             "properties": [
                 {
                     "name": "isLiked",
@@ -370,12 +370,12 @@
         },
         {
             "name": "TemplateContext",
-            "id": "interface-TemplateContext-f5da68820cab094ab56bd98ac0e49bc5",
+            "id": "interface-TemplateContext-740f391a07de66a4f34f6168815e5ca6",
             "file": "src/app/shared/components/custom-template/custom-template.component.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import {\n  Component,\n  ViewEncapsulation,\n  ChangeDetectionStrategy,\n  Input,\n  TemplateRef,\n} from '@angular/core';\n\nexport interface TemplateContext {\n  $implicit: string;\n  title: string;\n  subtitle: string;\n}\n\n@Component({\n  selector: 'app-custom-template',\n  templateUrl: './custom-template.component.html',\n  styleUrls: ['./custom-template.component.scss'],\n  encapsulation: ViewEncapsulation.Emulated,\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class CustomTemplateComponent {\n  @Input()\n  title!: string;\n\n  @Input()\n  subtitle!: string;\n\n  @Input()\n  template: TemplateRef<TemplateContext> | null = null;\n}\n",
+            "sourceCode": "import {\n  Component,\n  ViewEncapsulation,\n  ChangeDetectionStrategy,\n  Input,\n  TemplateRef,\n} from '@angular/core';\n\nexport interface TemplateContext {\n  $implicit: string;\n  title: string;\n  subtitle: string;\n}\n\n@Component({\n  selector: 'app-custom-template',\n  templateUrl: './custom-template.component.html',\n  styleUrls: ['./custom-template.component.scss'],\n  encapsulation: ViewEncapsulation.Emulated,\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class CustomTemplateComponent {\n  @Input()\n  title!: string;\n\n  @Input()\n  subtitle!: string;\n\n  @Input()\n  template: TemplateRef<TemplateContext> | null = null;\n\n  @Input()\n  templateConteudo!: TemplateRef<TemplateContext>;\n\n  @Input()\n  textos!: string[];\n}\n",
             "properties": [
                 {
                     "name": "$implicit",
@@ -930,7 +930,7 @@
         },
         {
             "name": "ChildComponent",
-            "id": "component-ChildComponent-d9a5e15c74a363e90f5ebec0999bfe51",
+            "id": "component-ChildComponent-ce335f9a3900bdd8d04d2762be4ba425",
             "file": "src/app/shared/components/parent-child/child/child.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -949,7 +949,18 @@
             "inputsClass": [],
             "outputsClass": [],
             "propertiesClass": [],
-            "methodsClass": [],
+            "methodsClass": [
+                {
+                    "name": "incrementar",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 9,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -957,7 +968,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-child',\n  templateUrl: './child.component.html',\n  styleUrls: ['./child.component.scss'],\n})\nexport class ChildComponent {}\n",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-child',\n  templateUrl: './child.component.html',\n  styleUrls: ['./child.component.scss'],\n})\nexport class ChildComponent {\n  incrementar() {\n    console.log('incrementar');\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -1173,11 +1184,11 @@
                 }
             ],
             "stylesData": "",
-            "templateData": "<ng-content></ng-content>\n\n<button app-content-trigger>Outro trigger</button>\n"
+            "templateData": "<h1><ng-content select=\"[titulo]\"></ng-content></h1>\n\n<div>\n  Conteúdo\n</div>\n\n<ng-content></ng-content>\n\n<button app-content-trigger>Outro trigger</button>\n"
         },
         {
             "name": "CounterComponent",
-            "id": "component-CounterComponent-e6067ddec5807a695669e2bcbe262c97",
+            "id": "component-CounterComponent-cc09666f6e594054fd1e9d0be5828ce4",
             "file": "src/app/shared/components/counter/counter.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1239,7 +1250,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 36,
+                    "line": 38,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -1249,7 +1260,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 26,
+                    "line": 27,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -1266,7 +1277,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 46,
+                    "line": 49,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1294,7 +1305,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 49,
+                    "line": 52,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1345,7 +1356,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, forwardRef, OnInit } from '@angular/core';\nimport { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';\n\n@Component({\n  selector: 'app-counter',\n  templateUrl: './counter.component.html',\n  styleUrls: ['./counter.component.scss'],\n  providers: [\n    {\n      provide: NG_VALUE_ACCESSOR,\n      useExisting: forwardRef(() => CounterComponent),\n      multi: true,\n    },\n  ],\n})\nexport class CounterComponent implements ControlValueAccessor {\n  value = 0;\n\n  onChange: null | ((value: number | null) => void) = null;\n  onTouched: null | (() => void) = null;\n\n  writeValue(value: number): void {\n    this.value = value;\n  }\n\n  plus(): void {\n    this.value++;\n    if (this.onChange) {\n      this.onChange(this.value);\n    }\n    if (this.onTouched) {\n      this.onTouched();\n    }\n  }\n\n  minus(): void {\n    this.value--;\n    if (this.onChange) {\n      this.onChange(this.value);\n    }\n    if (this.onTouched) {\n      this.onTouched();\n    }\n  }\n\n  registerOnChange(fn: any): void {\n    this.onChange = fn;\n  }\n  registerOnTouched(fn: any): void {\n    this.onTouched = fn;\n  }\n}\n",
+            "sourceCode": "import { Component, forwardRef, OnInit } from '@angular/core';\nimport { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';\n\n@Component({\n  selector: 'app-counter',\n  templateUrl: './counter.component.html',\n  styleUrls: ['./counter.component.scss'],\n  providers: [\n    {\n      provide: NG_VALUE_ACCESSOR,\n      useExisting: forwardRef(() => CounterComponent),\n      multi: true,\n    },\n  ],\n})\nexport class CounterComponent implements ControlValueAccessor {\n  value = 0;\n\n  onChange: null | ((value: number | null) => void) = null;\n  onTouched: null | (() => void) = null;\n\n  writeValue(value: number): void {\n    console.log('writeValue', value);\n    this.value = value;\n  }\n\n  plus(): void {\n    this.value++;\n    if (this.onChange) {\n      console.log('onChange plus', this.value);\n      this.onChange(this.value);\n    }\n    if (this.onTouched) {\n      this.onTouched();\n    }\n  }\n\n  minus(): void {\n    this.value--;\n    if (this.onChange) {\n      console.log('onChange minus', this.value);\n      this.onChange(this.value);\n    }\n    if (this.onTouched) {\n      this.onTouched();\n    }\n  }\n\n  registerOnChange(fn: any): void {\n    this.onChange = fn;\n  }\n  registerOnTouched(fn: any): void {\n    this.onTouched = fn;\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -1361,7 +1372,7 @@
         },
         {
             "name": "CustomTemplateComponent",
-            "id": "component-CustomTemplateComponent-f5da68820cab094ab56bd98ac0e49bc5",
+            "id": "component-CustomTemplateComponent-740f391a07de66a4f34f6168815e5ca6",
             "file": "src/app/shared/components/custom-template/custom-template.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [
@@ -1397,6 +1408,20 @@
                     "type": "TemplateRef<TemplateContext> | null"
                 },
                 {
+                    "name": "templateConteudo",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 33,
+                    "type": "TemplateRef<TemplateContext>"
+                },
+                {
+                    "name": "textos",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 36,
+                    "type": "string[]"
+                },
+                {
                     "name": "title",
                     "deprecated": false,
                     "deprecationMessage": "",
@@ -1414,7 +1439,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {\n  Component,\n  ViewEncapsulation,\n  ChangeDetectionStrategy,\n  Input,\n  TemplateRef,\n} from '@angular/core';\n\nexport interface TemplateContext {\n  $implicit: string;\n  title: string;\n  subtitle: string;\n}\n\n@Component({\n  selector: 'app-custom-template',\n  templateUrl: './custom-template.component.html',\n  styleUrls: ['./custom-template.component.scss'],\n  encapsulation: ViewEncapsulation.Emulated,\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class CustomTemplateComponent {\n  @Input()\n  title!: string;\n\n  @Input()\n  subtitle!: string;\n\n  @Input()\n  template: TemplateRef<TemplateContext> | null = null;\n}\n",
+            "sourceCode": "import {\n  Component,\n  ViewEncapsulation,\n  ChangeDetectionStrategy,\n  Input,\n  TemplateRef,\n} from '@angular/core';\n\nexport interface TemplateContext {\n  $implicit: string;\n  title: string;\n  subtitle: string;\n}\n\n@Component({\n  selector: 'app-custom-template',\n  templateUrl: './custom-template.component.html',\n  styleUrls: ['./custom-template.component.scss'],\n  encapsulation: ViewEncapsulation.Emulated,\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class CustomTemplateComponent {\n  @Input()\n  title!: string;\n\n  @Input()\n  subtitle!: string;\n\n  @Input()\n  template: TemplateRef<TemplateContext> | null = null;\n\n  @Input()\n  templateConteudo!: TemplateRef<TemplateContext>;\n\n  @Input()\n  textos!: string[];\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -1423,11 +1448,11 @@
                 }
             ],
             "stylesData": "",
-            "templateData": "<ng-container *ngTemplateOutlet=\"template || defaultTemplate;\ncontext: {\n  title: title,\n  subtitle: subtitle,\n  $implicit: title\n}\"></ng-container>\n\n\n<ng-template #defaultTemplate\n             let-default\n             let-title=\"title\"\n             let-subtitle=\"subtitle\">\n  <h1>{{title}}</h1>\n  <div>{{subtitle}}</div>\n\n  <div>{{default}}</div>\n</ng-template>\n"
+            "templateData": "<ng-container *ngTemplateOutlet=\"template || defaultTemplate;\ncontext: {\n  title: title,\n  subtitle: subtitle,\n  $implicit: title\n}\"></ng-container>\n\n<div>\n  <ng-container *ngFor=\"let texto of textos\">\n    <ng-container *ngTemplateOutlet=\"templateConteudo || defaultTemplateTexto;\n    context: {\n      $implicit: texto\n    }\"></ng-container>\n  </ng-container>\n</div>\n\n\n<ng-template #defaultTemplate\n             let-default\n             let-title=\"title\"\n             let-subtitle=\"subtitle\">\n  <h1>{{title}}</h1>\n  <div>{{subtitle}}</div>\n\n  <div>{{default}}</div>\n</ng-template>\n\n<ng-template #defaultTemplateTexto\n             let-default>\n  <h6>{{default}}</h6>\n</ng-template>\n"
         },
         {
             "name": "DynamicComponent",
-            "id": "component-DynamicComponent-89f0adee99e678d49c7411832c06fad5",
+            "id": "component-DynamicComponent-ccb306b0d5d0689d047158cda8588f6e",
             "file": "src/app/shared/components/dynamic/dynamic.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [
@@ -1482,7 +1507,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 47,
+                    "line": 43,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -1494,7 +1519,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {\n  Component,\n  ViewEncapsulation,\n  ChangeDetectionStrategy,\n  ComponentFactoryResolver,\n  ViewContainerRef,\n  ViewChild,\n  Injector,\n} from '@angular/core';\nimport { PureComponentComponent } from '../pure-component/pure-component.component';\n\n@Component({\n  selector: 'app-dynamic',\n  templateUrl: './dynamic.component.html',\n  styleUrls: ['./dynamic.component.scss'],\n  encapsulation: ViewEncapsulation.Emulated,\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class DynamicComponent {\n  @ViewChild('container', { read: ViewContainerRef })\n  container!: ViewContainerRef;\n\n  constructor(\n    private componentFactoryResolver: ComponentFactoryResolver,\n    private viewContainerRef: ViewContainerRef,\n    private injector: Injector\n  ) {}\n\n  addComponent(): void {\n    const factory = this.componentFactoryResolver.resolveComponentFactory(\n      PureComponentComponent\n    );\n    const componentRef = factory.create(this.injector);\n    const instance = componentRef.instance;\n    instance.open = Math.random() >= 0.5;\n    instance.count = Math.floor(Math.random() * 1000);\n    this.container.insert(componentRef.hostView);\n    // const compRef2 = this.container.createComponent(\n    //   factory,\n    //   undefined,\n    //   this.injector\n    // );\n    // this.viewContainerRef.insert(componentRef.hostView);\n    // this.viewContainerRef.createComponent(factory, undefined, this.injector);\n  }\n\n  removeComponent(): void {\n    this.container.remove();\n  }\n}\n",
+            "sourceCode": "import {\n  Component,\n  ViewEncapsulation,\n  ChangeDetectionStrategy,\n  ComponentFactoryResolver,\n  ViewContainerRef,\n  ViewChild,\n  Injector,\n} from '@angular/core';\nimport { PureComponentComponent } from '../pure-component/pure-component.component';\n\n@Component({\n  selector: 'app-dynamic',\n  templateUrl: './dynamic.component.html',\n  styleUrls: ['./dynamic.component.scss'],\n  encapsulation: ViewEncapsulation.Emulated,\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class DynamicComponent {\n  @ViewChild('container', { read: ViewContainerRef })\n  container!: ViewContainerRef;\n\n  constructor(\n    private componentFactoryResolver: ComponentFactoryResolver,\n    private viewContainerRef: ViewContainerRef,\n    private injector: Injector\n  ) {}\n\n  addComponent(): void {\n    const factory = this.componentFactoryResolver.resolveComponentFactory(\n      PureComponentComponent\n    );\n    const componentRef = factory.create(this.injector);\n    const instance = componentRef.instance;\n    instance.open = Math.random() >= 0.5;\n    instance.count = Math.floor(Math.random() * 1000);\n    // this.viewContainerRef.insert(componentRef.hostView);\n    const compRef2 = this.container.createComponent(factory);\n    // this.viewContainerRef.insert(componentRef.hostView);\n    // this.viewContainerRef.createComponent(factory, undefined, this.injector);\n  }\n\n  removeComponent(): void {\n    this.viewContainerRef.remove();\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -1635,7 +1660,7 @@
         },
         {
             "name": "NgContentSelectComponent",
-            "id": "component-NgContentSelectComponent-4135f7dc1325d7497d83bc48530d08f0",
+            "id": "component-NgContentSelectComponent-bbcd4e970428a784249dbced02ddf5e2",
             "file": "src/app/shared/components/ng-content-select/ng-content-select.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [
@@ -1650,7 +1675,7 @@
                 "./ng-content-select.component.scss"
             ],
             "styles": [],
-            "template": "<div class=\"top-left\">\n  <ng-content select=\"[top-left]\"></ng-content>\n</div>\n<div class=\"top-right\">\n  <ng-content select=\"[top-right]\"></ng-content>\n</div>\n<div class=\"bottom-left\">\n  <ng-content select=\"[bottom-left]\"></ng-content>\n</div>\n<div class=\"bottom-right\">\n  <ng-content select=\"[bottom-right]\"></ng-content>\n</div>\n",
+            "template": "<div class=\"top-left\">\n  <ng-content select=\"[top-left]\"></ng-content>\n</div>\n<div class=\"top-right\">\n  <ng-content select=\"[top-right]\"></ng-content>\n</div>\n<div class=\"bottom-left\">\n  <ng-content select=\"[bottom-left]\"></ng-content>\n</div>\n<div class=\"bottom-right\">\n  <ng-content select=\"h1\"></ng-content>\n</div>\n",
             "templateUrl": [],
             "viewProviders": [],
             "inputsClass": [],
@@ -1680,11 +1705,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {\n  Component,\n  ViewEncapsulation,\n  ChangeDetectionStrategy,\n  ContentChild,\n} from '@angular/core';\nimport { PureComponentComponent } from '../pure-component/pure-component.component';\n\n@Component({\n  selector: 'app-ng-content-select',\n  template: `\n    <div class=\"top-left\">\n      <ng-content select=\"[top-left]\"></ng-content>\n    </div>\n    <div class=\"top-right\">\n      <ng-content select=\"[top-right]\"></ng-content>\n    </div>\n    <div class=\"bottom-left\">\n      <ng-content select=\"[bottom-left]\"></ng-content>\n    </div>\n    <div class=\"bottom-right\">\n      <ng-content select=\"[bottom-right]\"></ng-content>\n    </div>\n  `,\n  styleUrls: ['./ng-content-select.component.scss'],\n  encapsulation: ViewEncapsulation.Emulated,\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class NgContentSelectComponent {\n  @ContentChild(PureComponentComponent)\n  pureComponent!: PureComponentComponent;\n}\n",
+            "sourceCode": "import {\n  Component,\n  ViewEncapsulation,\n  ChangeDetectionStrategy,\n  ContentChild,\n} from '@angular/core';\nimport { PureComponentComponent } from '../pure-component/pure-component.component';\n\n@Component({\n  selector: 'app-ng-content-select',\n  template: `\n    <div class=\"top-left\">\n      <ng-content select=\"[top-left]\"></ng-content>\n    </div>\n    <div class=\"top-right\">\n      <ng-content select=\"[top-right]\"></ng-content>\n    </div>\n    <div class=\"bottom-left\">\n      <ng-content select=\"[bottom-left]\"></ng-content>\n    </div>\n    <div class=\"bottom-right\">\n      <ng-content select=\"h1\"></ng-content>\n    </div>\n  `,\n  styleUrls: ['./ng-content-select.component.scss'],\n  encapsulation: ViewEncapsulation.Emulated,\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class NgContentSelectComponent {\n  @ContentChild(PureComponentComponent)\n  pureComponent!: PureComponentComponent;\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ":host {\n  display: block;\n  position: relative;\n  width: 100%;\n  height: 100vh;\n}\n\n.top-left {\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n\n.top-right {\n  position: absolute;\n  top: 0;\n  right: 100%;\n  margin-right: -100%;\n}\n\n.bottom-left {\n  position: absolute;\n  bottom: 0;\n  left: 0;\n}\n\n.bottom-right {\n  position: absolute;\n  bottom: 0;\n  right: 100%;\n  margin-right: -100%;\n}\n",
+                    "data": ":host {\n  display: block;\n  position: relative;\n  width: 100%;\n  height: 100vh;\n}\n\n.top-left {\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n\n.top-right {\n  position: absolute;\n  top: 0;\n  right: 100%;\n  margin-right: -100%;\n}\n\n::ng-deep {\n  [top-left] {\n    background-color: red;\n  }\n}\n\n\n.bottom-left {\n  position: absolute;\n  bottom: 0;\n  left: 0;\n}\n\n.bottom-right {\n  position: absolute;\n  bottom: 0;\n  right: 100%;\n  margin-right: -100%;\n}\n",
                     "styleUrl": "./ng-content-select.component.scss"
                 }
             ],
@@ -1692,7 +1717,7 @@
         },
         {
             "name": "NgContentSimpleComponent",
-            "id": "component-NgContentSimpleComponent-bb4c0c761bce30a1e9b639b0c43a75cd",
+            "id": "component-NgContentSimpleComponent-e0dc8a2682eaa24e2c8b9b02564bb4eb",
             "file": "src/app/shared/components/ng-content-simple/ng-content-simple.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [
@@ -1712,8 +1737,35 @@
             "viewProviders": [],
             "inputsClass": [],
             "outputsClass": [],
-            "propertiesClass": [],
-            "methodsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "pureComponent",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "QueryList<PureComponentComponent> | undefined",
+                    "optional": false,
+                    "description": "",
+                    "line": 24,
+                    "decorators": [
+                        {
+                            "name": "ContentChildren",
+                            "stringifiedArguments": "PureComponentComponent"
+                        }
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngAfterContentInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 26,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -1721,7 +1773,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {\n  Component,\n  ViewEncapsulation,\n  ChangeDetectionStrategy,\n} from '@angular/core';\n\n@Component({\n  selector: 'app-ng-content-simple',\n  template: `\n    <div>ng-content-simple works!</div>\n    <ng-content></ng-content>\n  `,\n  styleUrls: ['./ng-content-simple.component.scss'],\n  encapsulation: ViewEncapsulation.Emulated,\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class NgContentSimpleComponent {}\n",
+            "sourceCode": "import {\n  Component,\n  ViewEncapsulation,\n  ChangeDetectionStrategy,\n  ContentChild,\n  AfterContentInit,\n  ContentChildren,\n  QueryList,\n} from '@angular/core';\nimport { PureComponentComponent } from '../pure-component/pure-component.component';\n\n@Component({\n  selector: 'app-ng-content-simple',\n  template: `\n    <div>ng-content-simple works!</div>\n    <ng-content></ng-content>\n  `,\n  styleUrls: ['./ng-content-simple.component.scss'],\n  encapsulation: ViewEncapsulation.Emulated,\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class NgContentSimpleComponent implements AfterContentInit {\n  @ContentChildren(PureComponentComponent)\n  pureComponent: QueryList<PureComponentComponent> | undefined;\n\n  ngAfterContentInit(): void {\n    console.log(this.pureComponent);\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -1729,7 +1781,10 @@
                     "styleUrl": "./ng-content-simple.component.scss"
                 }
             ],
-            "stylesData": ""
+            "stylesData": "",
+            "implements": [
+                "AfterContentInit"
+            ]
         },
         {
             "name": "PageComponent",
@@ -1805,7 +1860,7 @@
         },
         {
             "name": "ParentComponent",
-            "id": "component-ParentComponent-ad3ddd4b0c88989a6ac7679527bca634",
+            "id": "component-ParentComponent-1565a070f400f31b2923fad23cfa230c",
             "file": "src/app/shared/components/parent-child/parent/parent.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1825,29 +1880,59 @@
             "outputsClass": [],
             "propertiesClass": [
                 {
-                    "name": "componenteFilho",
+                    "name": "componentesFilho",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "ChildComponent",
+                    "type": "QueryList<ChildComponent>",
                     "optional": false,
                     "description": "",
-                    "line": 11,
+                    "line": 17,
                     "decorators": [
                         {
-                            "name": "ViewChild",
+                            "name": "ViewChildren",
                             "stringifiedArguments": "ChildComponent"
                         }
                     ]
+                },
+                {
+                    "name": "filhos",
+                    "defaultValue": "['1']",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 19
                 }
             ],
             "methodsClass": [
+                {
+                    "name": "adicionarFilho",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 35,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "chamarFilho",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 29,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
                 {
                     "name": "ngAfterViewInit",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 13,
+                    "line": 25,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -1859,7 +1944,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { AfterViewInit, Component, ViewChild } from '@angular/core';\nimport { ChildComponent } from '../child/child.component';\n\n@Component({\n  selector: 'app-parent',\n  templateUrl: './parent.component.html',\n  styleUrls: ['./parent.component.scss'],\n})\nexport class ParentComponent implements AfterViewInit {\n  @ViewChild(ChildComponent)\n  componenteFilho!: ChildComponent;\n\n  ngAfterViewInit(): void {\n    console.log(this.componenteFilho);\n  }\n}\n",
+            "sourceCode": "import {\n  AfterViewInit,\n  Component,\n  QueryList,\n  ViewChild,\n  ViewChildren,\n} from '@angular/core';\nimport { ChildComponent } from '../child/child.component';\n\n@Component({\n  selector: 'app-parent',\n  templateUrl: './parent.component.html',\n  styleUrls: ['./parent.component.scss'],\n})\nexport class ParentComponent implements AfterViewInit {\n  @ViewChildren(ChildComponent)\n  componentesFilho!: QueryList<ChildComponent>;\n\n  filhos = ['1'];\n\n  constructor() {\n    console.log('construtor:', this.componentesFilho);\n  }\n\n  ngAfterViewInit(): void {\n    console.log(this.componentesFilho);\n  }\n\n  chamarFilho() {\n    this.componentesFilho.forEach((component) => {\n      component.incrementar();\n    });\n  }\n\n  adicionarFilho() {\n    this.filhos.push('');\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -1868,10 +1953,18 @@
                 }
             ],
             "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 19
+            },
             "implements": [
                 "AfterViewInit"
             ],
-            "templateData": "<p>Componente pai</p>\n<app-child></app-child>\n"
+            "templateData": "<p>Componente pai</p>\n<app-child *ngFor=\"let filho of filhos\"></app-child>\n<button (click)=\"chamarFilho()\">Chamar metodo no filho</button>\n<button (click)=\"adicionarFilho()\">Adicionar filho</button>\n"
         },
         {
             "name": "PostComponent",
@@ -2189,7 +2282,7 @@
         },
         {
             "name": "ConfigurableModule",
-            "id": "module-ConfigurableModule-2a7e11b33b1b5d06b8d877d8dd3e0d82",
+            "id": "module-ConfigurableModule-7acef7319438acd42d5ad481b5c5fcd1",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
@@ -2200,7 +2293,7 @@
                     "args": [
                         {
                             "name": "config",
-                            "type": "ComponentConfig",
+                            "type": "Partial<ComponentConfig>",
                             "deprecated": false,
                             "deprecationMessage": ""
                         }
@@ -2217,7 +2310,7 @@
                     "jsdoctags": [
                         {
                             "name": "config",
-                            "type": "ComponentConfig",
+                            "type": "Partial<ComponentConfig>",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
@@ -2227,7 +2320,7 @@
                     ]
                 }
             ],
-            "sourceCode": "import { NgModule, ModuleWithProviders } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { ConfigurableComponent } from './configurable/configurable.component';\nimport {\n  CONFIG_TOKEN,\n  DEFAULT_CONFIG,\n  ComponentConfig,\n} from './configuration.const';\n\n@NgModule({\n  declarations: [ConfigurableComponent],\n  imports: [CommonModule],\n  exports: [ConfigurableComponent],\n  providers: [\n    {\n      provide: CONFIG_TOKEN,\n      useValue: DEFAULT_CONFIG,\n    },\n  ],\n})\nexport class ConfigurableModule {\n  public static forRoot(\n    config: ComponentConfig\n  ): ModuleWithProviders<ConfigurableModule> {\n    return {\n      ngModule: ConfigurableModule,\n      providers: [\n        {\n          provide: CONFIG_TOKEN,\n          useValue: config,\n        },\n      ],\n    };\n  }\n}\n",
+            "sourceCode": "import { NgModule, ModuleWithProviders } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { ConfigurableComponent } from './configurable/configurable.component';\nimport {\n  CONFIG_TOKEN,\n  DEFAULT_CONFIG,\n  ComponentConfig,\n} from './configuration.const';\n\n@NgModule({\n  declarations: [ConfigurableComponent],\n  imports: [CommonModule],\n  exports: [ConfigurableComponent],\n  providers: [\n    {\n      provide: CONFIG_TOKEN,\n      useValue: DEFAULT_CONFIG,\n    },\n  ],\n})\nexport class ConfigurableModule {\n  public static forRoot(\n    config: Partial<ComponentConfig>\n  ): ModuleWithProviders<ConfigurableModule> {\n    return {\n      ngModule: ConfigurableModule,\n      providers: [\n        {\n          provide: CONFIG_TOKEN,\n          useFactory: () => {\n            return {\n              ...DEFAULT_CONFIG,\n              ...config,\n            };\n          },\n        },\n      ],\n    };\n  }\n}\n",
             "children": [
                 {
                     "type": "providers",
@@ -2265,13 +2358,13 @@
         },
         {
             "name": "SharedModule",
-            "id": "module-SharedModule-217648047d0371585bd716b2ec4f19b0",
+            "id": "module-SharedModule-a2e5d8305fa4c67bb58f3bef72fd120d",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/shared/shared.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatRadioModule } from '@angular/material/radio';\nimport { MatCheckboxModule } from '@angular/material/checkbox';\nimport { MatDialogModule } from '@angular/material/dialog';\nimport { MatFormFieldModule } from '@angular/material/form-field';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatInputModule } from '@angular/material/input';\nimport { MatMenuModule } from '@angular/material/menu';\nimport { MatProgressBarModule } from '@angular/material/progress-bar';\nimport { MatProgressSpinnerModule } from '@angular/material/progress-spinner';\nimport { MatSelectModule } from '@angular/material/select';\nimport { MatSidenavModule } from '@angular/material/sidenav';\nimport { MatTableModule } from '@angular/material/table';\nimport { MatTooltipModule } from '@angular/material/tooltip';\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\nimport { RecursiveComponent } from './components/recursive/recursive.component';\nimport { PureComponentComponent } from './components/pure-component/pure-component.component';\nimport { PostComponent } from './components/post/post.component';\nimport { NgContentSimpleComponent } from './components/ng-content-simple/ng-content-simple.component';\nimport { NgContentSelectComponent } from './components/ng-content-select/ng-content-select.component';\nimport { DynamicComponent } from './components/dynamic/dynamic.component';\nimport { CustomTemplateComponent } from './components/custom-template/custom-template.component';\nimport { ContentTriggerComponent } from './components/content-trigger/content-trigger.component';\nimport { ContentTriggerDirective } from './components/content-trigger/content-trigger.directive';\nimport { CounterComponent } from './components/counter/counter.component';\nimport { ParentComponent } from './components/parent-child/parent/parent.component';\nimport { ChildComponent } from './components/parent-child/child/child.component';\n\nconst sharedModules = [\n  CommonModule,\n  MatButtonModule,\n  MatRadioModule,\n  MatCheckboxModule,\n  MatDialogModule,\n  MatFormFieldModule,\n  MatIconModule,\n  MatInputModule,\n  MatMenuModule,\n  MatProgressBarModule,\n  MatProgressSpinnerModule,\n  MatSelectModule,\n  MatSidenavModule,\n  MatTableModule,\n  MatTooltipModule,\n  FormsModule,\n  ReactiveFormsModule,\n];\n\nexport const sharedComponents = [\n  RecursiveComponent,\n  PureComponentComponent,\n  PostComponent,\n  NgContentSimpleComponent,\n  NgContentSelectComponent,\n  DynamicComponent,\n  CustomTemplateComponent,\n  ContentTriggerComponent,\n  ContentTriggerDirective,\n  CounterComponent,\n];\n\n@NgModule({\n  declarations: [...sharedComponents, ParentComponent, ChildComponent],\n  imports: [...sharedModules],\n  exports: [...sharedModules, ...sharedComponents],\n})\nexport class SharedModule {}\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatRadioModule } from '@angular/material/radio';\nimport { MatCheckboxModule } from '@angular/material/checkbox';\nimport { MatDialogModule } from '@angular/material/dialog';\nimport { MatFormFieldModule } from '@angular/material/form-field';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatInputModule } from '@angular/material/input';\nimport { MatMenuModule } from '@angular/material/menu';\nimport { MatProgressBarModule } from '@angular/material/progress-bar';\nimport { MatProgressSpinnerModule } from '@angular/material/progress-spinner';\nimport { MatSelectModule } from '@angular/material/select';\nimport { MatSidenavModule } from '@angular/material/sidenav';\nimport { MatTableModule } from '@angular/material/table';\nimport { MatTooltipModule } from '@angular/material/tooltip';\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\nimport { RecursiveComponent } from './components/recursive/recursive.component';\nimport { PureComponentComponent } from './components/pure-component/pure-component.component';\nimport { PostComponent } from './components/post/post.component';\nimport { NgContentSimpleComponent } from './components/ng-content-simple/ng-content-simple.component';\nimport { NgContentSelectComponent } from './components/ng-content-select/ng-content-select.component';\nimport { DynamicComponent } from './components/dynamic/dynamic.component';\nimport { CustomTemplateComponent } from './components/custom-template/custom-template.component';\nimport { ContentTriggerComponent } from './components/content-trigger/content-trigger.component';\nimport { ContentTriggerDirective } from './components/content-trigger/content-trigger.directive';\nimport { CounterComponent } from './components/counter/counter.component';\nimport { ParentComponent } from './components/parent-child/parent/parent.component';\nimport { ChildComponent } from './components/parent-child/child/child.component';\n\nconst sharedModules = [\n  CommonModule,\n  MatButtonModule,\n  MatRadioModule,\n  MatCheckboxModule,\n  MatDialogModule,\n  MatFormFieldModule,\n  MatIconModule,\n  MatInputModule,\n  MatMenuModule,\n  MatProgressBarModule,\n  MatProgressSpinnerModule,\n  MatSelectModule,\n  MatSidenavModule,\n  MatTableModule,\n  MatTooltipModule,\n  FormsModule,\n  ReactiveFormsModule,\n];\n\nexport const sharedComponents = [\n  RecursiveComponent,\n  PureComponentComponent,\n  PostComponent,\n  NgContentSimpleComponent,\n  NgContentSelectComponent,\n  DynamicComponent,\n  CustomTemplateComponent,\n  ContentTriggerComponent,\n  ContentTriggerDirective,\n  CounterComponent,\n  ParentComponent,\n];\n\n@NgModule({\n  declarations: [...sharedComponents, ParentComponent, ChildComponent],\n  imports: [...sharedModules],\n  exports: [...sharedModules, ...sharedComponents],\n})\nexport class SharedModule {}\n",
             "children": [
                 {
                     "type": "providers",
@@ -2347,6 +2440,9 @@
                             "name": "NgContentSimpleComponent"
                         },
                         {
+                            "name": "ParentComponent"
+                        },
+                        {
                             "name": "PostComponent"
                         },
                         {
@@ -2394,6 +2490,26 @@
                 "name": "Basic",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/app/shared/components/counter/counter.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Basic",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/shared/components/dynamic/dynamic.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Basic",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/app/shared/components/custom-template/custom-template.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -2405,16 +2521,6 @@
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/app/shared/components/ng-content-select/ng-content-select.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "Basic",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/shared/components/dynamic/dynamic.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -2529,6 +2635,16 @@
                 "deprecationMessage": "",
                 "type": "object",
                 "defaultValue": "{\n  production: false,\n}"
+            },
+            {
+                "name": "Fechado",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/shared/components/pure-component/pure-component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
             },
             {
                 "name": "formFieldOptions",
@@ -2657,7 +2773,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "[]",
-                "defaultValue": "[\n  RecursiveComponent,\n  PureComponentComponent,\n  PostComponent,\n  NgContentSimpleComponent,\n  NgContentSelectComponent,\n  DynamicComponent,\n  CustomTemplateComponent,\n  ContentTriggerComponent,\n  ContentTriggerDirective,\n  CounterComponent,\n]"
+                "defaultValue": "[\n  RecursiveComponent,\n  PureComponentComponent,\n  PostComponent,\n  NgContentSimpleComponent,\n  NgContentSelectComponent,\n  DynamicComponent,\n  CustomTemplateComponent,\n  ContentTriggerComponent,\n  ContentTriggerDirective,\n  CounterComponent,\n  ParentComponent,\n]"
             },
             {
                 "name": "sharedModules",
@@ -2727,27 +2843,17 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story<ContentTriggerComponent>",
-                "defaultValue": "(\n  args: ContentTriggerComponent\n) => ({\n  props: args,\n  moduleMetadata: {\n    imports: [SharedModule],\n  },\n  template: `\n<app-content-trigger>\n  <button app-content-trigger [customData]=\"{ prop: 'some data' }\"> MY CUSTOM BUTTON</button>\n</app-content-trigger>\n`,\n})"
+                "defaultValue": "(\n  args: ContentTriggerComponent\n) => ({\n  props: args,\n  moduleMetadata: {\n    imports: [SharedModule],\n  },\n  template: `\n<app-content-trigger>\n  <div titulo>Titulo da Aba <button app-content-trigger [customData]=\"'Fechar'\">X</button></div>\n  <button app-content-trigger [customData]=\"{ prop: 'some data' }\">\n    MY CUSTOM BUTTON\n  </button>\n</app-content-trigger>\n`,\n})"
             },
             {
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/shared/components/custom-template/custom-template.stories.ts",
+                "file": "src/app/shared/components/counter/counter.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<CustomTemplateComponent>",
-                "defaultValue": "(\n  args: CustomTemplateComponent\n) => ({\n  props: args,\n  moduleMetadata: {\n    imports: [SharedModule],\n  },\n  template: `\n  <app-custom-template\n  [title]=\"title\"\n  [subtitle]=\"subtitle\"\n\n>\n</app-custom-template>\n\n<ng-template #customTemplate\n  let-default\n  let-title=\"title\"\n  let-subtitle=\"subtitle\">\n  <h5>CUSTOM TEMPLATE</h5>\n\n  <p style=\"color: blue\">{{title}}</p>\n  <p style=\"color: red\">{{subtitle}}</p>\n  <p style=\"color: green\">{{default}}</p>\n</ng-template>\n`,\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/shared/components/ng-content-select/ng-content-select.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<NgContentSelectComponent>",
-                "defaultValue": "(\n  args: NgContentSelectComponent\n) => ({\n  props: args,\n  moduleMetadata: {\n    imports: [SharedModule],\n  },\n  template: `\n<app-ng-content-select>\n  <div top-left>TOP LEFT</div>\n  <div top-right>TOP RIGHT</div>\n  <div bottom-left>BOTTOM LEFT</div>\n  <app-pure-component bottom-right></app-pure-component>\n</app-ng-content-select>\n`,\n})"
+                "type": "Story<CounterComponent>",
+                "defaultValue": "(args: CounterComponent) => ({\n  props: args,\n  moduleMetadata: {\n    imports: [SharedModule, FormsModule],\n  },\n  template: `\n  <app-counter formControlName=\"counter\"></app-counter>\n  `,\n})"
             },
             {
                 "name": "Template",
@@ -2763,11 +2869,31 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/app/shared/components/custom-template/custom-template.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<CustomTemplateComponent>",
+                "defaultValue": "(\n  args: CustomTemplateComponent\n) => ({\n  props: args,\n  moduleMetadata: {\n    imports: [SharedModule],\n  },\n  template: `\n  <app-custom-template\n  [title]=\"title\"\n  [subtitle]=\"subtitle\"\n  [template]=\"customTemplate\"\n\n  [textos]=\"['a', 'b', 'c']\"\n>\n</app-custom-template>\n\n<ng-template #customTemplate\n  let-default\n  let-title=\"title\"\n  let-subtitle=\"subtitle\">\n  <h5>CUSTOM TEMPLATE</h5>\n\n  <p style=\"color: blue\">{{title}}</p>\n  <p style=\"color: red\">{{subtitle}}</p>\n  <p style=\"color: green\">{{default}}</p>\n</ng-template>\n\n<ng-template #templateConteudo let-texto>\n  <div style=\"background-color: grey\">{{texto}}</div>\n</ng-template>\n`,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/shared/components/ng-content-select/ng-content-select.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<NgContentSelectComponent>",
+                "defaultValue": "(\n  args: NgContentSelectComponent\n) => ({\n  props: args,\n  moduleMetadata: {\n    imports: [SharedModule],\n  },\n  template: `\n<app-ng-content-select>\n  <div top-left>TOP LEFT</div>\n  <div top-right>TOP RIGHT</div>\n  <div bottom-left>BOTTOM LEFT</div>\n  <h1>Teste </h1>\n</app-ng-content-select>\n`,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/app/shared/components/ng-content-simple/ng-content-simple.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story<NgContentSimpleComponent>",
-                "defaultValue": "(\n  args: NgContentSimpleComponent\n) => ({\n  props: args,\n  moduleMetadata: {\n    imports: [SharedModule],\n  },\n  template: `\n<app-ng-content-simple>\n  <h1>My content</h1>\n  <app-pure-component></app-pure-component>\n</app-ng-content-simple>\n`,\n})"
+                "defaultValue": "(\n  args: NgContentSimpleComponent\n) => ({\n  props: args,\n  moduleMetadata: {\n    imports: [SharedModule],\n  },\n  template: `\n<app-ng-content-simple>\n    <h1>My content</h1>\n    <app-pure-component></app-pure-component>\n</app-ng-content-simple>\n`,\n})"
             },
             {
                 "name": "Template",
@@ -2807,7 +2933,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story<ConfigurableComponent>",
-                "defaultValue": "(\n  args: ConfigurableComponent\n) => ({\n  props: args,\n  moduleMetadata: {\n    imports: [ConfigurableModule],\n    // providers: [\n    //   {\n    //     provide: CONFIG_TOKEN,\n    //     useValue: {\n    //       backgroundColor: 'blue',\n    //       borderRadius: '40px',\n    //       color: 'white',\n    //     } as ComponentConfig,\n    //   },\n    // ],\n  },\n  template: `\n  <app-configurable></app-configurable>\n  `,\n})"
+                "defaultValue": "(\n  args: ConfigurableComponent\n) => ({\n  props: args,\n  moduleMetadata: {\n    imports: [\n      ConfigurableModule.forRoot({\n        color: 'green',\n      }),\n    ],\n    // providers: [\n    //   {\n    //     provide: CONFIG_TOKEN,\n    //     useValue: {\n    //       backgroundColor: 'blue',\n    //       borderRadius: '40px',\n    //       color: 'white',\n    //     } as ComponentConfig,\n    //   },\n    // ],\n  },\n  template: `\n  <app-configurable></app-configurable>\n  `,\n})"
             },
             {
                 "name": "Template",
@@ -2964,15 +3090,15 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story<ContentTriggerComponent>",
-                    "defaultValue": "(\n  args: ContentTriggerComponent\n) => ({\n  props: args,\n  moduleMetadata: {\n    imports: [SharedModule],\n  },\n  template: `\n<app-content-trigger>\n  <button app-content-trigger [customData]=\"{ prop: 'some data' }\"> MY CUSTOM BUTTON</button>\n</app-content-trigger>\n`,\n})"
+                    "defaultValue": "(\n  args: ContentTriggerComponent\n) => ({\n  props: args,\n  moduleMetadata: {\n    imports: [SharedModule],\n  },\n  template: `\n<app-content-trigger>\n  <div titulo>Titulo da Aba <button app-content-trigger [customData]=\"'Fechar'\">X</button></div>\n  <button app-content-trigger [customData]=\"{ prop: 'some data' }\">\n    MY CUSTOM BUTTON\n  </button>\n</app-content-trigger>\n`,\n})"
                 }
             ],
-            "src/app/shared/components/custom-template/custom-template.stories.ts": [
+            "src/app/shared/components/counter/counter.stories.ts": [
                 {
                     "name": "Basic",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/app/shared/components/custom-template/custom-template.stories.ts",
+                    "file": "src/app/shared/components/counter/counter.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
@@ -2982,33 +3108,11 @@
                     "name": "Template",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/app/shared/components/custom-template/custom-template.stories.ts",
+                    "file": "src/app/shared/components/counter/counter.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "Story<CustomTemplateComponent>",
-                    "defaultValue": "(\n  args: CustomTemplateComponent\n) => ({\n  props: args,\n  moduleMetadata: {\n    imports: [SharedModule],\n  },\n  template: `\n  <app-custom-template\n  [title]=\"title\"\n  [subtitle]=\"subtitle\"\n\n>\n</app-custom-template>\n\n<ng-template #customTemplate\n  let-default\n  let-title=\"title\"\n  let-subtitle=\"subtitle\">\n  <h5>CUSTOM TEMPLATE</h5>\n\n  <p style=\"color: blue\">{{title}}</p>\n  <p style=\"color: red\">{{subtitle}}</p>\n  <p style=\"color: green\">{{default}}</p>\n</ng-template>\n`,\n})"
-                }
-            ],
-            "src/app/shared/components/ng-content-select/ng-content-select.stories.ts": [
-                {
-                    "name": "Basic",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/shared/components/ng-content-select/ng-content-select.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/shared/components/ng-content-select/ng-content-select.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story<NgContentSelectComponent>",
-                    "defaultValue": "(\n  args: NgContentSelectComponent\n) => ({\n  props: args,\n  moduleMetadata: {\n    imports: [SharedModule],\n  },\n  template: `\n<app-ng-content-select>\n  <div top-left>TOP LEFT</div>\n  <div top-right>TOP RIGHT</div>\n  <div bottom-left>BOTTOM LEFT</div>\n  <app-pure-component bottom-right></app-pure-component>\n</app-ng-content-select>\n`,\n})"
+                    "type": "Story<CounterComponent>",
+                    "defaultValue": "(args: CounterComponent) => ({\n  props: args,\n  moduleMetadata: {\n    imports: [SharedModule, FormsModule],\n  },\n  template: `\n  <app-counter formControlName=\"counter\"></app-counter>\n  `,\n})"
                 }
             ],
             "src/app/shared/components/dynamic/dynamic.stories.ts": [
@@ -3033,6 +3137,50 @@
                     "defaultValue": "(args: DynamicComponent) => ({\n  props: args,\n  moduleMetadata: {\n    imports: [SharedModule],\n  },\n  template: `\n<div>DYNAMIC COMPONENTS</div>\n<app-dynamic>\n</app-dynamic>\n`,\n})"
                 }
             ],
+            "src/app/shared/components/custom-template/custom-template.stories.ts": [
+                {
+                    "name": "Basic",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/shared/components/custom-template/custom-template.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/shared/components/custom-template/custom-template.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<CustomTemplateComponent>",
+                    "defaultValue": "(\n  args: CustomTemplateComponent\n) => ({\n  props: args,\n  moduleMetadata: {\n    imports: [SharedModule],\n  },\n  template: `\n  <app-custom-template\n  [title]=\"title\"\n  [subtitle]=\"subtitle\"\n  [template]=\"customTemplate\"\n\n  [textos]=\"['a', 'b', 'c']\"\n>\n</app-custom-template>\n\n<ng-template #customTemplate\n  let-default\n  let-title=\"title\"\n  let-subtitle=\"subtitle\">\n  <h5>CUSTOM TEMPLATE</h5>\n\n  <p style=\"color: blue\">{{title}}</p>\n  <p style=\"color: red\">{{subtitle}}</p>\n  <p style=\"color: green\">{{default}}</p>\n</ng-template>\n\n<ng-template #templateConteudo let-texto>\n  <div style=\"background-color: grey\">{{texto}}</div>\n</ng-template>\n`,\n})"
+                }
+            ],
+            "src/app/shared/components/ng-content-select/ng-content-select.stories.ts": [
+                {
+                    "name": "Basic",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/shared/components/ng-content-select/ng-content-select.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/shared/components/ng-content-select/ng-content-select.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<NgContentSelectComponent>",
+                    "defaultValue": "(\n  args: NgContentSelectComponent\n) => ({\n  props: args,\n  moduleMetadata: {\n    imports: [SharedModule],\n  },\n  template: `\n<app-ng-content-select>\n  <div top-left>TOP LEFT</div>\n  <div top-right>TOP RIGHT</div>\n  <div bottom-left>BOTTOM LEFT</div>\n  <h1>Teste </h1>\n</app-ng-content-select>\n`,\n})"
+                }
+            ],
             "src/app/shared/components/ng-content-simple/ng-content-simple.stories.ts": [
                 {
                     "name": "Basic",
@@ -3052,7 +3200,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story<NgContentSimpleComponent>",
-                    "defaultValue": "(\n  args: NgContentSimpleComponent\n) => ({\n  props: args,\n  moduleMetadata: {\n    imports: [SharedModule],\n  },\n  template: `\n<app-ng-content-simple>\n  <h1>My content</h1>\n  <app-pure-component></app-pure-component>\n</app-ng-content-simple>\n`,\n})"
+                    "defaultValue": "(\n  args: NgContentSimpleComponent\n) => ({\n  props: args,\n  moduleMetadata: {\n    imports: [SharedModule],\n  },\n  template: `\n<app-ng-content-simple>\n    <h1>My content</h1>\n    <app-pure-component></app-pure-component>\n</app-ng-content-simple>\n`,\n})"
                 }
             ],
             "src/app/shared/components/post/post.stories.ts": [
@@ -3080,6 +3228,16 @@
             "src/app/shared/components/pure-component/pure-component.stories.ts": [
                 {
                     "name": "Basic",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/shared/components/pure-component/pure-component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Fechado",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "src/app/shared/components/pure-component/pure-component.stories.ts",
@@ -3150,7 +3308,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story<ConfigurableComponent>",
-                    "defaultValue": "(\n  args: ConfigurableComponent\n) => ({\n  props: args,\n  moduleMetadata: {\n    imports: [ConfigurableModule],\n    // providers: [\n    //   {\n    //     provide: CONFIG_TOKEN,\n    //     useValue: {\n    //       backgroundColor: 'blue',\n    //       borderRadius: '40px',\n    //       color: 'white',\n    //     } as ComponentConfig,\n    //   },\n    // ],\n  },\n  template: `\n  <app-configurable></app-configurable>\n  `,\n})"
+                    "defaultValue": "(\n  args: ConfigurableComponent\n) => ({\n  props: args,\n  moduleMetadata: {\n    imports: [\n      ConfigurableModule.forRoot({\n        color: 'green',\n      }),\n    ],\n    // providers: [\n    //   {\n    //     provide: CONFIG_TOKEN,\n    //     useValue: {\n    //       backgroundColor: 'blue',\n    //       borderRadius: '40px',\n    //       color: 'white',\n    //     } as ComponentConfig,\n    //   },\n    // ],\n  },\n  template: `\n  <app-configurable></app-configurable>\n  `,\n})"
                 }
             ],
             "src/app/shared/components/parent-child/parent/parent.stories.ts": [
@@ -3413,7 +3571,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "[]",
-                    "defaultValue": "[\n  RecursiveComponent,\n  PureComponentComponent,\n  PostComponent,\n  NgContentSimpleComponent,\n  NgContentSelectComponent,\n  DynamicComponent,\n  CustomTemplateComponent,\n  ContentTriggerComponent,\n  ContentTriggerDirective,\n  CounterComponent,\n]"
+                    "defaultValue": "[\n  RecursiveComponent,\n  PureComponentComponent,\n  PostComponent,\n  NgContentSimpleComponent,\n  NgContentSelectComponent,\n  DynamicComponent,\n  CustomTemplateComponent,\n  ContentTriggerComponent,\n  ContentTriggerDirective,\n  CounterComponent,\n  ParentComponent,\n]"
                 },
                 {
                     "name": "sharedModules",
@@ -3697,12 +3855,32 @@
                 "status": "low"
             },
             {
+                "filePath": "src/app/shared/components/counter/counter.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Basic",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/components/counter/counter.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
                 "filePath": "src/app/shared/components/custom-template/custom-template.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "CustomTemplateComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/4",
+                "coverageCount": "0/6",
                 "status": "low"
             },
             {
@@ -3798,7 +3976,7 @@
                 "linktype": "component",
                 "name": "NgContentSimpleComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/1",
+                "coverageCount": "0/3",
                 "status": "low"
             },
             {
@@ -3827,7 +4005,7 @@
                 "linktype": "component",
                 "name": "ChildComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/1",
+                "coverageCount": "0/2",
                 "status": "low"
             },
             {
@@ -3836,7 +4014,7 @@
                 "linktype": "component",
                 "name": "ParentComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/3",
+                "coverageCount": "0/7",
                 "status": "low"
             },
             {
@@ -3922,6 +4100,16 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "Basic",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/components/pure-component/pure-component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Fechado",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"

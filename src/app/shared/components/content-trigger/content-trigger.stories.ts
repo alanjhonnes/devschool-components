@@ -17,7 +17,10 @@ const Template: Story<ContentTriggerComponent> = (
   },
   template: `
 <app-content-trigger>
-  <button app-content-trigger [customData]="{ prop: 'some data' }"> MY CUSTOM BUTTON</button>
+  <div titulo>Titulo da Aba <button app-content-trigger [customData]="'Fechar'">X</button></div>
+  <button app-content-trigger [customData]="{ prop: 'some data' }">
+    MY CUSTOM BUTTON
+  </button>
 </app-content-trigger>
 `,
 });
